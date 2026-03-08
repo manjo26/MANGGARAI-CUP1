@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Manggarai League</title>
+<title>Manggarai Cup</title>
 
 <style>
 
@@ -14,7 +14,7 @@ text-align:center;
 }
 
 h1{
-margin-top:20px;
+margin:20px;
 }
 
 .container{
@@ -22,21 +22,18 @@ display:flex;
 justify-content:center;
 gap:40px;
 flex-wrap:wrap;
-margin-top:30px;
 }
 
 .table-box{
 background:#1e293b;
 padding:20px;
 border-radius:10px;
-width:400px;
-box-shadow:0 0 10px rgba(0,0,0,0.4);
+width:420px;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:10px;
 }
 
 th{
@@ -54,7 +51,7 @@ text-align:left;
 font-weight:bold;
 }
 
-.jadwal{
+.schedule{
 margin-top:40px;
 }
 
@@ -62,17 +59,14 @@ margin-top:40px;
 background:#1e293b;
 margin:10px auto;
 padding:12px;
-width:500px;
+width:520px;
 border-radius:8px;
 display:flex;
 justify-content:space-between;
-align-items:center;
 }
 
-.score{
-background:#0f172a;
-padding:6px 10px;
-border-radius:6px;
+.time{
+color:#22c55e;
 }
 
 .week{
@@ -81,104 +75,165 @@ color:#22c55e;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<h1>🏆 Manggarai League</h1>
+<h1>🏆 EFOOTBALL MANGGARAI CUP</h1>
 
 <div class="container">
 
 <div class="table-box">
 <h2>Grup A</h2>
-
-<table id="tableA">
+<table>
 <tr>
 <th>No</th>
 <th>Tim</th>
 <th>P</th>
 <th>Pts</th>
 </tr>
-</table>
 
+<tr><td>1</td><td class="team">PALOPO FC</td><td>0</td><td>0</td></tr>
+<tr><td>2</td><td class="team">JURU KUNCI FC</td><td>0</td><td>0</td></tr>
+<tr><td>3</td><td class="team">ARSENAL</td><td>0</td><td>0</td></tr>
+<tr><td>4</td><td class="team">ARENA FC</td><td>0</td><td>0</td></tr>
+<tr><td>5</td><td class="team">AYAM GEPREK FC</td><td>0</td><td>0</td></tr>
+
+</table>
 </div>
 
 <div class="table-box">
 <h2>Grup B</h2>
+<table>
 
-<table id="tableB">
 <tr>
 <th>No</th>
 <th>Tim</th>
 <th>P</th>
 <th>Pts</th>
 </tr>
+
+<tr><td>1</td><td class="team">MANGGARAI RAYA</td><td>0</td><td>0</td></tr>
+<tr><td>2</td><td class="team">PESONA FC</td><td>0</td><td>0</td></tr>
+<tr><td>3</td><td class="team">BANGKA NACAP FC</td><td>0</td><td>0</td></tr>
+<tr><td>4</td><td class="team">PSCEWANG</td><td>0</td><td>0</td></tr>
+<tr><td>5</td><td class="team">GAPURTO FC</td><td>0</td><td>0</td></tr>
+
 </table>
-
 </div>
 
 </div>
 
-<div class="jadwal">
+<div class="schedule">
 
 <h2>📅 Jadwal Pertandingan</h2>
 
-<div id="schedule"></div>
+<!-- GRUP A -->
 
+<h3>GRUP A</h3>
+
+<h4 class="week">Pekan 1</h4>
+
+<div class="match">
+<span>PALOPO FC vs JURU KUNCI FC</span>
+<span class="time">15:00</span>
 </div>
 
-<script>
+<div class="match">
+<span>ARENA FC vs AYAM GEPREK FC</span>
+<span class="time">15:20</span>
+</div>
 
-const schedule={
-A:[
-{
-week:"Pekan 1",
-matches:[
-["PALOPO FC","JURU KUNCI FC"],
-["ARENAFC","AYAM GEPREK FC"]
-],
-bye:"ARSENAL"
-},
-{
-week:"Pekan 2",
-matches:[
-["PALOPO FC","AYAM GEPREK FC"],
-["JURU KUNCI FC","ARSENAL"]
-],
-bye:"ARENAFC"
-}
-],
+<p>ARSENAL (BYE)</p>
 
-B:[
-{
-week:"Pekan 1",
-matches:[
-["MANGGARAI RAYA","PESONA FC"],
-["BANGKA NACAP FC","PSCEWANG"]
-],
-bye:"GAPURTO FC"
-},
-{
-week:"Pekan 2",
-matches:[
-["MANGGARAI RAYA","PSCEWANG"],
-["PESONA FC","GAPURTO FC"]
-],
-bye:"BANGKA NACAP FC"
-}
-]
-}
+<h4 class="week">Pekan 2</h4>
 
-let scores={}
+<div class="match">
+<span>ARSENAL vs ARENA FC</span>
+<span class="time">16:20</span>
+</div>
 
-function renderSchedule(){
+<div class="match">
+<span>AYAM GEPREK FC vs JURU KUNCI FC</span>
+<span class="time">16:40</span>
+</div>
 
-let div=document.getElementById("schedule")
+<p>PALOPO FC (BYE)</p>
 
-for(let g in schedule){
+<h4 class="week">Pekan 3</h4>
 
-div.innerHTML+=`<h3>Grup ${g}</h3>`
+<div class="match">
+<span>PALOPO FC vs AYAM GEPREK FC</span>
+<span class="time">17:40</span>
+</div>
 
-schedule[g].forEach((w,i)=>{
+<div class="match">
+<span>JURU KUNCI FC vs ARSENAL</span>
+<span class="time">18:00</span>
+</div>
 
-div.innerHTML+=`<h4 class="week
+<p>ARENA FC (BYE)</p>
+
+<h4 class="week">Pekan 4</h4>
+
+<div class="match">
+<span>ARENA FC vs JURU KUNCI FC</span>
+<span class="time">19:00</span>
+</div>
+
+<div class="match">
+<span>ARSENAL vs PALOPO FC</span>
+<span class="time">19:20</span>
+</div>
+
+<p>AYAM GEPREK FC (BYE)</p>
+
+<h4 class="week">Pekan 5</h4>
+
+<div class="match">
+<span>AYAM GEPREK FC vs ARSENAL</span>
+<span class="time">20:20</span>
+</div>
+
+<div class="match">
+<span>PALOPO FC vs ARENA FC</span>
+<span class="time">20:40</span>
+</div>
+
+<p>JURU KUNCI FC (BYE)</p>
+
+
+<!-- GRUP B -->
+
+<h3>GRUP B</h3>
+
+<h4 class="week">Pekan 1</h4>
+
+<div class="match">
+<span>MANGGARAI RAYA vs PESONA FC</span>
+<span class="time">15:40</span>
+</div>
+
+<div class="match">
+<span>BANGKA NACAP FC vs PSCEWANG</span>
+<span class="time">16:00</span>
+</div>
+
+<p>GAPURTO FC (BYE)</p>
+
+<h4 class="week">Pekan 2</h4>
+
+<div class="match">
+<span>GAPURTO FC vs BANGKA NACAP FC</span>
+<span class="time">17:00</span>
+</div>
+
+<div class="match">
+<span>PSCEWANG vs PESONA FC</span>
+<span class="time">17:20</span>
+</div>
+
+<p>MANGGARAI RAYA (BYE)</p>
+
+<h4 class="week">
