@@ -1,16 +1,12 @@
-const ADMIN_PASSWORD="admin123"
+const password="admin123"
 
 function login(){
 
-let p=document.getElementById("password").value
+let p=document.getElementById("pass").value
 
-if(p===ADMIN_PASSWORD){
-
-document.getElementById("loginBox").style.display="none"
-document.getElementById("adminPanel").style.display="block"
-
+if(p===password){
+document.getElementById("panel").style.display="block"
 loadAdminMatches()
-
 }else{
 alert("Password salah")
 }
@@ -33,70 +29,23 @@ const groupB=[
 "PESONA FC"
 ]
 
-const matches=[
+const schedule={
 
-["PALOPO FC","JURU KUNCI FC"],
-["ARENAFC","AYAM GEPREK FC"],
-["PALOPO FC","AYAM GEPREK FC"],
-["JURU KUNCI FC","ARSENAL"],
-["PALOPO FC","ARSENAL"],
-["AYAM GEPREK FC","ARENAFC"],
-["PALOPO FC","ARENAFC"],
-["ARSENAL","AYAM GEPREK FC"],
-["ARENAFC","JURU KUNCI FC"],
-["ARSENAL","PALOPO FC"],
+A:[
+{week:"Pekan 1",matches:[["PALOPO FC","JURU KUNCI FC"],["ARENAFC","AYAM GEPREK FC"]],bye:"ARSENAL"},
+{week:"Pekan 2",matches:[["PALOPO FC","AYAM GEPREK FC"],["JURU KUNCI FC","ARSENAL"]],bye:"ARENAFC"},
+{week:"Pekan 3",matches:[["PALOPO FC","ARSENAL"],["AYAM GEPREK FC","ARENAFC"]],bye:"JURU KUNCI FC"},
+{week:"Pekan 4",matches:[["PALOPO FC","ARENAFC"],["ARSENAL","AYAM GEPREK FC"]],bye:"JURU KUNCI FC"},
+{week:"Pekan 5",matches:[["ARENAFC","JURU KUNCI FC"],["ARSENAL","PALOPO FC"]],bye:"AYAM GEPREK FC"}
+],
 
-["MANGGARAI RAYA","PESONA FC"],
-["BANGKA NACAP FC","PSCEWANG"],
-["MANGGARAI RAYA","PSCEWANG"],
-["PESONA FC","GAPURTO FC"],
-["MANGGARAI RAYA","GAPURTO FC"],
-["PSCEWANG","BANGKA NACAP FC"],
-["MANGGARAI RAYA","BANGKA NACAP FC"],
-["GAPURTO FC","PESONA FC"],
-["PESONA FC","BANGKA NACAP FC"],
-["GAPURTO FC","PSCEWANG"]
-
+B:[
+{week:"Pekan 1",matches:[["MANGGARAI RAYA","PESONA FC"],["BANGKA NACAP FC","PSCEWANG"]],bye:"GAPURTO FC"},
+{week:"Pekan 2",matches:[["MANGGARAI RAYA","PSCEWANG"],["PESONA FC","GAPURTO FC"]],bye:"BANGKA NACAP FC"},
+{week:"Pekan 3",matches:[["MANGGARAI RAYA","GAPURTO FC"],["PSCEWANG","BANGKA NACAP FC"]],bye:"PESONA FC"},
+{week:"Pekan 4",matches:[["MANGGARAI RAYA","BANGKA NACAP FC"],["GAPURTO FC","PESONA FC"]],bye:"PSCEWANG"},
+{week:"Pekan 5",matches:[["PESONA FC","BANGKA NACAP FC"],["GAPURTO FC","PSCEWANG"]],bye:"MANGGARAI RAYA"}
 ]
-
-function loadAdminMatches(){
-
-let div=document.getElementById("adminMatches")
-
-matches.forEach((m,i)=>{
-
-div.innerHTML+=`
-<p>
-${m[0]}
-<input id="s1${i}">
-vs
-<input id="s2${i}">
-${m[1]}
-</p>
-`
-
-})
-
-}
-
-function saveScores(){
-
-let scores=[]
-
-matches.forEach((m,i)=>{
-
-let s1=document.getElementById("s1"+i).value
-let s2=document.getElementById("s2"+i).value
-
-scores.push([s1,s2])
-
-})
-
-localStorage.setItem("scores",JSON.stringify(scores))
-
-alert("Skor tersimpan!")
-
-location.reload()
 
 }
 
@@ -111,9 +60,6 @@ group.forEach(team=>{
 let row=`
 <tr>
 <td>${team}</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -137,12 +83,75 @@ let div=document.getElementById("matches")
 
 if(!div) return
 
-matches.forEach(m=>{
+for(let g in schedule){
+
+div.innerHTML+=`<h3>Grup ${g}</h3>`
+
+schedule[g].forEach(w=>{
+
+div.innerHTML+=`<h4>${w.week}</h4>`
+
+w.matches.forEach(m=>{
 
 div.innerHTML+=`<p>${m[0]} vs ${m[1]}</p>`
 
 })
 
+div.innerHTML+=`<p><i>${w.bye} (Libur)</i></p>`
+
+})
+
+}
+
 }
 
 loadMatches()
+
+function loadAdminMatches(){
+
+let div=document.getElementById("adminMatches")
+
+let i=0
+
+for(let g in schedule){
+
+schedule[g].forEach(w=>{
+
+w.matches.forEach(m=>{
+
+div.innerHTML+=`
+<p>
+${m[0]}
+<input id="s1${i}">
+vs
+<input id="s2${i}">
+${m[1]}
+</p>
+`
+
+i++
+
+})
+
+})
+
+}
+
+}
+
+function saveScores(){
+
+let scores=[]
+let inputs=document.querySelectorAll("input")
+
+inputs.forEach(i=>{
+
+scores.push(i.value)
+
+})
+
+localStorage.setItem("scores",JSON.stringify(scores))
+
+alert("Skor disimpan!")
+
+}
