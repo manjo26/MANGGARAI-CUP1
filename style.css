@@ -1,50 +1,52 @@
-body{
-font-family:Arial;
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-color:white;
-text-align:center;
+.login-box{
+margin:20px;
 }
 
-h1{
-color:gold;
-margin-top:20px;
-}
-
-.sub{
-margin-bottom:30px;
-opacity:0.8;
-}
-
-.container{
+.match-card{
 display:flex;
+align-items:center;
 justify-content:center;
-gap:40px;
-flex-wrap:wrap;
-}
-
-.card{
-background:#111;
-padding:20px;
+gap:20px;
+background:#0f172a;
+padding:15px;
+margin:10px auto;
+width:80%;
 border-radius:10px;
-width:400px;
-box-shadow:0 0 15px rgba(0,0,0,0.7);
 }
 
-table{
-width:100%;
-border-collapse:collapse;
+.team{
+width:180px;
+font-weight:bold;
 }
 
-th{
-background:gold;
-color:black;
+.score{
+width:50px;
+height:40px;
+font-size:18px;
+text-align:center;
+border-radius:6px;
+border:none;
 }
 
-th,td{
-padding:8px;
-border:1px solid #444;
+.vs{
+font-weight:bold;
 }
 
-tr:nth-child(even){
-background:#1c1c1c;
+.save-btn{
+background:#22c55e;
+border:none;
+padding:12px 25px;
+font-size:16px;
+cursor:pointer;
+margin-top:20px;
+border-radius:6px;
+}
+
+.week{
+margin-top:25px;
+color:#22c55e;
+}
+
+.group-title{
+margin-top:40px;
 }
