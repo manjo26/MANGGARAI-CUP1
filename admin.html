@@ -2,14 +2,12 @@
 <html>
 <head>
 <title>Admin Manggarai Cup</title>
-<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
 </head>
 
 <body>
 
 <h1>Admin Input Skor</h1>
-
-<form id="formSkor">
 
 <select id="tim1">
 <option>PALOPO FC</option>
@@ -17,7 +15,6 @@
 <option>ARSENAL</option>
 <option>AYAM GEPREK FC</option>
 <option>JURU KUNCI FC</option>
-
 <option>MANGGARAI RAYA</option>
 <option>BANGKA NACAP FC</option>
 <option>GAPURTO FC</option>
@@ -37,7 +34,6 @@ VS
 <option>ARSENAL</option>
 <option>AYAM GEPREK FC</option>
 <option>JURU KUNCI FC</option>
-
 <option>MANGGARAI RAYA</option>
 <option>BANGKA NACAP FC</option>
 <option>GAPURTO FC</option>
@@ -47,11 +43,47 @@ VS
 
 <br><br>
 
-<button type="submit">Simpan Skor</button>
+<button onclick="inputSkor()">Simpan Skor</button>
 
-</form>
+<script>
 
-<script src="script.js"></script>
+function inputSkor(){
+
+let t1=document.getElementById("tim1").value
+let t2=document.getElementById("tim2").value
+
+let s1=parseInt(document.getElementById("skor1").value)
+let s2=parseInt(document.getElementById("skor2").value)
+
+data[t1].m++
+data[t2].m++
+
+if(s1>s2){
+data[t1].w++
+data[t2].l++
+data[t1].p+=3
+}
+
+else if(s2>s1){
+data[t2].w++
+data[t1].l++
+data[t2].p+=3
+}
+
+else{
+data[t1].d++
+data[t2].d++
+data[t1].p+=1
+data[t2].p+=1
+}
+
+localStorage.setItem("klasemen",JSON.stringify(data))
+
+alert("Skor berhasil disimpan")
+
+}
+
+</script>
 
 </body>
 </html>
