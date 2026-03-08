@@ -12,6 +12,30 @@
 
 <div class="login-box">
 
+  <input type="password" id="pass" placeholder="Masukkan password">
+<button onclick="login()">Login</button>
+
+<div id="panel" style="display:none;">
+Admin Panel
+</div>
+
+<script>
+function login(){
+
+let password="admin123"
+let input=document.getElementById("pass").value
+
+if(input===password){
+document.getElementById("panel").style.display="block"
+alert("Login berhasil")
+}else{
+alert("Password salah")
+}
+
+}
+</script>
+
+
 <input type="password" id="pass" placeholder="Password admin">
 <button onclick="login()">Login</button>
 
