@@ -1,89 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Manggarai Cup</title>
-<script src="script.js"></script>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>Admin Input Skor</h1>
+<h1>⚙️ Manggarai Cup Admin</h1>
 
-<select id="tim1">
-<option>PALOPO FC</option>
-<option>ARENA FC</option>
-<option>ARSENAL</option>
-<option>AYAM GEPREK FC</option>
-<option>JURU KUNCI FC</option>
-<option>MANGGARAI RAYA</option>
-<option>BANGKA NACAP FC</option>
-<option>GAPURTO FC</option>
-<option>PSCEWANG</option>
-<option>PESONA FC</option>
-</select>
+<div class="login-box">
 
-<input type="number" id="skor1">
+<input type="password" id="pass" placeholder="Password admin">
+<button onclick="login()">Login</button>
 
-VS
+</div>
 
-<input type="number" id="skor2">
+<div id="panel" style="display:none">
 
-<select id="tim2">
-<option>PALOPO FC</option>
-<option>ARENA FC</option>
-<option>ARSENAL</option>
-<option>AYAM GEPREK FC</option>
-<option>JURU KUNCI FC</option>
-<option>MANGGARAI RAYA</option>
-<option>BANGKA NACAP FC</option>
-<option>GAPURTO FC</option>
-<option>PSCEWANG</option>
-<option>PESONA FC</option>
-</select>
+<h2>⚽ Input Skor Pertandingan</h2>
 
-<br><br>
+<div id="adminMatches"></div>
 
-<button onclick="inputSkor()">Simpan Skor</button>
+<button class="save-btn" onclick="saveScores()">💾 Simpan Semua Skor</button>
 
-<script>
+</div>
 
-function inputSkor(){
-
-let t1=document.getElementById("tim1").value
-let t2=document.getElementById("tim2").value
-
-let s1=parseInt(document.getElementById("skor1").value)
-let s2=parseInt(document.getElementById("skor2").value)
-
-data[t1].m++
-data[t2].m++
-
-if(s1>s2){
-data[t1].w++
-data[t2].l++
-data[t1].p+=3
-}
-
-else if(s2>s1){
-data[t2].w++
-data[t1].l++
-data[t2].p+=3
-}
-
-else{
-data[t1].d++
-data[t2].d++
-data[t1].p+=1
-data[t2].p+=1
-}
-
-localStorage.setItem("klasemen",JSON.stringify(data))
-
-alert("Skor berhasil disimpan")
-
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
