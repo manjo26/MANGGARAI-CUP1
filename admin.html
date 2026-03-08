@@ -2,24 +2,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Panel</title>
+<title>Admin Dashboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>⚙️ Admin Manggarai Cup</h1>
+<h1>⚙️ Manggarai Cup Admin</h1>
 
-<input type="password" id="pass" placeholder="Password">
+<div class="login-box">
+
+<input type="password" id="pass" placeholder="Password admin">
 <button onclick="login()">Login</button>
+
+</div>
 
 <div id="panel" style="display:none">
 
-<h2>Input Skor</h2>
+<h2>⚽ Input Skor Pertandingan</h2>
 
 <div id="adminMatches"></div>
 
-<button onclick="saveScores()">💾 Simpan Skor</button>
+<button class="save-btn" onclick="saveScores()">💾 Simpan Semua Skor</button>
 
 </div>
 
