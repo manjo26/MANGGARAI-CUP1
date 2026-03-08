@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Manggarai Cup</title>
+<title>Efootball Manggarai Cup</title>
 
 <style>
 
@@ -46,11 +46,6 @@ padding:8px;
 border-bottom:1px solid #334155;
 }
 
-.team{
-text-align:left;
-font-weight:bold;
-}
-
 .schedule{
 margin-top:40px;
 }
@@ -58,20 +53,41 @@ margin-top:40px;
 .match{
 background:#1e293b;
 margin:10px auto;
-padding:12px;
-width:520px;
+padding:10px;
+width:600px;
 border-radius:8px;
 display:flex;
 justify-content:space-between;
+align-items:center;
 }
 
-.time{
-color:#22c55e;
+.score{
+display:flex;
+gap:5px;
 }
 
-.week{
-margin-top:30px;
-color:#22c55e;
+input{
+width:40px;
+text-align:center;
+}
+
+button{
+padding:6px 10px;
+border:none;
+background:#22c55e;
+color:white;
+cursor:pointer;
+border-radius:5px;
+}
+
+.admin{
+margin-top:40px;
+background:#1e293b;
+padding:20px;
+width:400px;
+margin-left:auto;
+margin-right:auto;
+border-radius:10px;
 }
 
 </style>
@@ -86,40 +102,25 @@ color:#22c55e;
 
 <div class="table-box">
 <h2>Grup A</h2>
-<table>
+<table id="tableA">
 <tr>
 <th>No</th>
 <th>Tim</th>
 <th>P</th>
 <th>Pts</th>
 </tr>
-
-<tr><td>1</td><td class="team">PALOPO FC</td><td>0</td><td>0</td></tr>
-<tr><td>2</td><td class="team">JURU KUNCI FC</td><td>0</td><td>0</td></tr>
-<tr><td>3</td><td class="team">ARSENAL</td><td>0</td><td>0</td></tr>
-<tr><td>4</td><td class="team">ARENA FC</td><td>0</td><td>0</td></tr>
-<tr><td>5</td><td class="team">AYAM GEPREK FC</td><td>0</td><td>0</td></tr>
-
 </table>
 </div>
 
 <div class="table-box">
 <h2>Grup B</h2>
-<table>
-
+<table id="tableB">
 <tr>
 <th>No</th>
 <th>Tim</th>
 <th>P</th>
 <th>Pts</th>
 </tr>
-
-<tr><td>1</td><td class="team">MANGGARAI RAYA</td><td>0</td><td>0</td></tr>
-<tr><td>2</td><td class="team">PESONA FC</td><td>0</td><td>0</td></tr>
-<tr><td>3</td><td class="team">BANGKA NACAP FC</td><td>0</td><td>0</td></tr>
-<tr><td>4</td><td class="team">PSCEWANG</td><td>0</td><td>0</td></tr>
-<tr><td>5</td><td class="team">GAPURTO FC</td><td>0</td><td>0</td></tr>
-
 </table>
 </div>
 
@@ -129,156 +130,174 @@ color:#22c55e;
 
 <h2>📅 Jadwal Pertandingan</h2>
 
-<!-- GRUP A -->
+<div id="matches"></div>
 
-<h3>GRUP A</h3>
+</div>
 
-<h4 class="week">Pekan 1</h4>
+<div class="admin">
+
+<h2>🔐 Admin Login</h2>
+
+<input type="password" id="pass" placeholder="Password admin">
+<button onclick="login()">Login</button>
+
+<div id="adminPanel" style="display:none">
+
+<h3>Input Skor</h3>
+
+<p>Masukkan skor di jadwal pertandingan</p>
+
+</div>
+
+</div>
+
+<script>
+
+const password="admin123"
+
+let matches=[
+
+{g:"A",t1:"PALOPO FC",t2:"JURU KUNCI FC"},
+{g:"A",t1:"ARENA FC",t2:"AYAM GEPREK FC"},
+{g:"A",t1:"ARSENAL",t2:"ARENA FC"},
+{g:"A",t1:"AYAM GEPREK FC",t2:"JURU KUNCI FC"},
+{g:"A",t1:"PALOPO FC",t2:"AYAM GEPREK FC"},
+{g:"A",t1:"JURU KUNCI FC",t2:"ARSENAL"},
+{g:"A",t1:"ARENA FC",t2:"JURU KUNCI FC"},
+{g:"A",t1:"ARSENAL",t2:"PALOPO FC"},
+{g:"A",t1:"AYAM GEPREK FC",t2:"ARSENAL"},
+{g:"A",t1:"PALOPO FC",t2:"ARENA FC"},
+
+{g:"B",t1:"MANGGARAI RAYA",t2:"PESONA FC"},
+{g:"B",t1:"BANGKA NACAP FC",t2:"PSCEWANG"},
+{g:"B",t1:"GAPURTO FC",t2:"BANGKA NACAP FC"},
+{g:"B",t1:"PSCEWANG",t2:"PESONA FC"},
+{g:"B",t1:"MANGGARAI RAYA",t2:"PSCEWANG"},
+{g:"B",t1:"PESONA FC",t2:"GAPURTO FC"},
+{g:"B",t1:"BANGKA NACAP FC",t2:"PESONA FC"},
+{g:"B",t1:"GAPURTO FC",t2:"MANGGARAI RAYA"},
+{g:"B",t1:"PSCEWANG",t2:"GAPURTO FC"},
+{g:"B",t1:"MANGGARAI RAYA",t2:"BANGKA NACAP FC"}
+
+]
+
+let scores=JSON.parse(localStorage.getItem("scores"))||{}
+
+function renderMatches(){
+
+let div=document.getElementById("matches")
+
+div.innerHTML=""
+
+matches.forEach((m,i)=>{
+
+let s=scores[i]||["",""]
+
+div.innerHTML+=`
 
 <div class="match">
-<span>PALOPO FC vs JURU KUNCI FC</span>
-<span class="time">15:00</span>
-</div>
 
-<div class="match">
-<span>ARENA FC vs AYAM GEPREK FC</span>
-<span class="time">15:20</span>
-</div>
+<span>${m.t1}</span>
 
-<p>ARSENAL (BYE)</p>
+<div class="score">
 
-<h4 class="week">Pekan 2</h4>
+<input id="s1${i}" value="${s[0]}" disabled>
 
-<div class="match">
-<span>ARSENAL vs ARENA FC</span>
-<span class="time">16:20</span>
-</div>
+<span>vs</span>
 
-<div class="match">
-<span>AYAM GEPREK FC vs JURU KUNCI FC</span>
-<span class="time">16:40</span>
-</div>
-
-<p>PALOPO FC (BYE)</p>
-
-<h4 class="week">Pekan 3</h4>
-
-<div class="match">
-<span>PALOPO FC vs AYAM GEPREK FC</span>
-<span class="time">17:40</span>
-</div>
-
-<div class="match">
-<span>JURU KUNCI FC vs ARSENAL</span>
-<span class="time">18:00</span>
-</div>
-
-<p>ARENA FC (BYE)</p>
-
-<h4 class="week">Pekan 4</h4>
-
-<div class="match">
-<span>ARENA FC vs JURU KUNCI FC</span>
-<span class="time">19:00</span>
-</div>
-
-<div class="match">
-<span>ARSENAL vs PALOPO FC</span>
-<span class="time">19:20</span>
-</div>
-
-<p>AYAM GEPREK FC (BYE)</p>
-
-<h4 class="week">Pekan 5</h4>
-
-<div class="match">
-<span>AYAM GEPREK FC vs ARSENAL</span>
-<span class="time">20:20</span>
-</div>
-
-<div class="match">
-<span>PALOPO FC vs ARENA FC</span>
-<span class="time">20:40</span>
-</div>
-
-<p>JURU KUNCI FC (BYE)</p>
-
-
-<!-- GRUP B -->
-
-<h3>GRUP B</h3>
-
-<h4 class="week">Pekan 1</h4>
-
-<div class="match">
-<span>MANGGARAI RAYA vs PESONA FC</span>
-<span class="time">15:40</span>
-</div>
-
-<div class="match">
-<span>BANGKA NACAP FC vs PSCEWANG</span>
-<span class="time">16:00</span>
-</div>
-
-<p>GAPURTO FC (BYE)</p>
-
-<h4 class="week">Pekan 2</h4>
-
-<div class="match">
-<span>GAPURTO FC vs BANGKA NACAP FC</span>
-<span class="time">17:00</span>
-</div>
-
-<div class="match">
-<span>PSCEWANG vs PESONA FC</span>
-<span class="time">17:20</span>
-</div>
-
-<p>MANGGARAI RAYA (BYE)</p>
-
-<h4 class="week">Pekan 3</h4>
-
-<div class="match">
-<span>MANGGARAI RAYA vs PSCEWANG</span>
-<span class="time">18:20</span>
-</div>
-
-<div class="match">
-<span>PESONA FC vs GAPURTO FC</span>
-<span class="time">18:40</span>
-</div>
-
-<p>BANGKA NACAP FC (BYE)</p>
-
-<h4 class="week">Pekan 4</h4>
-
-<div class="match">
-<span>BANGKA NACAP FC vs PESONA FC</span>
-<span class="time">19:40</span>
-</div>
-
-<div class="match">
-<span>GAPURTO FC vs MANGGARAI RAYA</span>
-<span class="time">20:00</span>
-</div>
-
-<p>PSCEWANG (BYE)</p>
-
-<h4 class="week">Pekan 5</h4>
-
-<div class="match">
-<span>PSCEWANG vs GAPURTO FC</span>
-<span class="time">21:00</span>
-</div>
-
-<div class="match">
-<span>MANGGARAI RAYA vs BANGKA NACAP FC</span>
-<span class="time">21:20</span>
-</div>
-
-<p>PESONA FC (BYE)</p>
+<input id="s2${i}" value="${s[1]}" disabled>
 
 </div>
+
+<span>${m.t2}</span>
+
+</div>
+
+`
+
+})
+
+}
+
+function login(){
+
+let p=document.getElementById("pass").value
+
+if(p===password){
+
+document.getElementById("adminPanel").style.display="block"
+
+matches.forEach((m,i)=>{
+
+document.getElementById("s1"+i).disabled=false
+document.getElementById("s2"+i).disabled=false
+
+})
+
+alert("Login berhasil")
+
+}else{
+
+alert("Password salah")
+
+}
+
+}
+
+function updateTable(){
+
+let teams={}
+
+matches.forEach((m,i)=>{
+
+let s=scores[i]
+
+if(!teams[m.t1]) teams[m.t1]={p:0,pts:0}
+if(!teams[m.t2]) teams[m.t2]={p:0,pts:0}
+
+if(s){
+
+let g1=parseInt(s[0])
+let g2=parseInt(s[1])
+
+teams[m.t1].p++
+teams[m.t2].p++
+
+if(g1>g2) teams[m.t1].pts+=3
+else if(g2>g1) teams[m.t2].pts+=3
+else{
+teams[m.t1].pts+=1
+teams[m.t2].pts+=1
+}
+
+}
+
+})
+
+}
+
+function saveScores(){
+
+matches.forEach((m,i)=>{
+
+let g1=document.getElementById("s1"+i).value
+let g2=document.getElementById("s2"+i).value
+
+if(g1!==""&&g2!==""){
+scores[i]=[g1,g2]
+}
+
+})
+
+localStorage.setItem("scores",JSON.stringify(scores))
+
+alert("Skor disimpan")
+
+}
+
+renderMatches()
+
+</script>
 
 </body>
 </html>
