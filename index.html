@@ -1,303 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Efootball Manggarai Cup</title>
-
-<style>
-
-body{
-font-family:Arial;
-background:#0f172a;
-color:white;
-text-align:center;
-}
-
-h1{
-margin:20px;
-}
-
-.container{
-display:flex;
-justify-content:center;
-gap:40px;
-flex-wrap:wrap;
-}
-
-.table-box{
-background:#1e293b;
-padding:20px;
-border-radius:10px;
-width:420px;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-th{
-background:#22c55e;
-padding:10px;
-}
-
-td{
-padding:8px;
-border-bottom:1px solid #334155;
-}
-
-.schedule{
-margin-top:40px;
-}
-
-.match{
-background:#1e293b;
-margin:10px auto;
-padding:10px;
-width:600px;
-border-radius:8px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.score{
-display:flex;
-gap:5px;
-}
-
-input{
-width:40px;
-text-align:center;
-}
-
-button{
-padding:6px 10px;
-border:none;
-background:#22c55e;
-color:white;
-cursor:pointer;
-border-radius:5px;
-}
-
-.admin{
-margin-top:40px;
-background:#1e293b;
-padding:20px;
-width:400px;
-margin-left:auto;
-margin-right:auto;
-border-radius:10px;
-}
-
-</style>
-
+<title>Manggarai Cup 1</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>🏆 EFOOTBALL MANGGARAI CUP</h1>
+<h1>MANGGARAI CUP 1</h1>
+<h2>Pemimpin Klasemen</h2>
 
-<div class="container">
+<div class="tabel">
 
-<div class="table-box">
-<h2>Grup A</h2>
-<table id="tableA">
+<h3>GRUP A</h3>
+<table id="grupA">
 <tr>
-<th>No</th>
 <th>Tim</th>
-<th>P</th>
-<th>Pts</th>
+<th>Main</th>
+<th>Poin</th>
 </tr>
 </table>
-</div>
 
-<div class="table-box">
-<h2>Grup B</h2>
-<table id="tableB">
+<h3>GRUP B</h3>
+<table id="grupB">
 <tr>
-<th>No</th>
 <th>Tim</th>
-<th>P</th>
-<th>Pts</th>
+<th>Main</th>
+<th>Poin</th>
 </tr>
 </table>
-</div>
 
 </div>
 
-<div class="schedule">
-
-<h2>📅 Jadwal Pertandingan</h2>
-
-<div id="matches"></div>
-
-</div>
-
-<div class="admin">
-
-<h2>🔐 Admin Login</h2>
-
-<input type="password" id="pass" placeholder="Password admin">
-<button onclick="login()">Login</button>
-
-<div id="adminPanel" style="display:none">
-
-<h3>Input Skor</h3>
-
-<p>Masukkan skor di jadwal pertandingan</p>
-
-</div>
-
-</div>
-
-<script>
-
-const password="admin123"
-
-let matches=[
-
-{g:"A",t1:"PALOPO FC",t2:"JURU KUNCI FC"},
-{g:"A",t1:"ARENA FC",t2:"AYAM GEPREK FC"},
-{g:"A",t1:"ARSENAL",t2:"ARENA FC"},
-{g:"A",t1:"AYAM GEPREK FC",t2:"JURU KUNCI FC"},
-{g:"A",t1:"PALOPO FC",t2:"AYAM GEPREK FC"},
-{g:"A",t1:"JURU KUNCI FC",t2:"ARSENAL"},
-{g:"A",t1:"ARENA FC",t2:"JURU KUNCI FC"},
-{g:"A",t1:"ARSENAL",t2:"PALOPO FC"},
-{g:"A",t1:"AYAM GEPREK FC",t2:"ARSENAL"},
-{g:"A",t1:"PALOPO FC",t2:"ARENA FC"},
-
-{g:"B",t1:"MANGGARAI RAYA",t2:"PESONA FC"},
-{g:"B",t1:"BANGKA NACAP FC",t2:"PSCEWANG"},
-{g:"B",t1:"GAPURTO FC",t2:"BANGKA NACAP FC"},
-{g:"B",t1:"PSCEWANG",t2:"PESONA FC"},
-{g:"B",t1:"MANGGARAI RAYA",t2:"PSCEWANG"},
-{g:"B",t1:"PESONA FC",t2:"GAPURTO FC"},
-{g:"B",t1:"BANGKA NACAP FC",t2:"PESONA FC"},
-{g:"B",t1:"GAPURTO FC",t2:"MANGGARAI RAYA"},
-{g:"B",t1:"PSCEWANG",t2:"GAPURTO FC"},
-{g:"B",t1:"MANGGARAI RAYA",t2:"BANGKA NACAP FC"}
-
-]
-
-let scores=JSON.parse(localStorage.getItem("scores"))||{}
-
-function renderMatches(){
-
-let div=document.getElementById("matches")
-
-div.innerHTML=""
-
-matches.forEach((m,i)=>{
-
-let s=scores[i]||["",""]
-
-div.innerHTML+=`
-
-<div class="match">
-
-<span>${m.t1}</span>
-
-<div class="score">
-
-<input id="s1${i}" value="${s[0]}" disabled>
-
-<span>vs</span>
-
-<input id="s2${i}" value="${s[1]}" disabled>
-
-</div>
-
-<span>${m.t2}</span>
-
-</div>
-
-`
-
-})
-
-}
-
-function login(){
-
-let p=document.getElementById("pass").value
-
-if(p===password){
-
-document.getElementById("adminPanel").style.display="block"
-
-matches.forEach((m,i)=>{
-
-document.getElementById("s1"+i).disabled=false
-document.getElementById("s2"+i).disabled=false
-
-})
-
-alert("Login berhasil")
-
-}else{
-
-alert("Password salah")
-
-}
-
-}
-
-function updateTable(){
-
-let teams={}
-
-matches.forEach((m,i)=>{
-
-let s=scores[i]
-
-if(!teams[m.t1]) teams[m.t1]={p:0,pts:0}
-if(!teams[m.t2]) teams[m.t2]={p:0,pts:0}
-
-if(s){
-
-let g1=parseInt(s[0])
-let g2=parseInt(s[1])
-
-teams[m.t1].p++
-teams[m.t2].p++
-
-if(g1>g2) teams[m.t1].pts+=3
-else if(g2>g1) teams[m.t2].pts+=3
-else{
-teams[m.t1].pts+=1
-teams[m.t2].pts+=1
-}
-
-}
-
-})
-
-}
-
-function saveScores(){
-
-matches.forEach((m,i)=>{
-
-let g1=document.getElementById("s1"+i).value
-let g2=document.getElementById("s2"+i).value
-
-if(g1!==""&&g2!==""){
-scores[i]=[g1,g2]
-}
-
-})
-
-localStorage.setItem("scores",JSON.stringify(scores))
-
-alert("Skor disimpan")
-
-}
-
-renderMatches()
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
