@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Manggarai Cup</title>
+</head>
+
+<body>
+
+<h1>🏆 MANGGARAI CUP EFOOTBALL</h1>
+
+<h2>Tim Peserta</h2>
+
+<ul id="teamList"></ul>
+
+<script>
+
+let teams = JSON.parse(localStorage.getItem("teams")) || []
+
+let list = document.getElementById("teamList")
+
+teams.forEach(team => {
+
+let li = document.createElement("li")
+li.innerText = team
+list.appendChild(li)
+
+})
+
+</script>
+
+</body>
+</html>
