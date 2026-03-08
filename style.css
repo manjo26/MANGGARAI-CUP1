@@ -1,21 +1,49 @@
 body{
-font-family: Arial;
-text-align:center;
-background:#111;
+font-family:Arial;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
-}
-
-table{
-margin:auto;
-border-collapse:collapse;
-width:300px;
-}
-
-th,td{
-border:1px solid white;
-padding:8px;
+text-align:center;
 }
 
 h1{
 color:gold;
+margin-top:20px;
+}
+
+.sub{
+opacity:0.8;
+margin-bottom:30px;
+}
+
+.container{
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+}
+
+.card{
+background:#111;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.6);
+}
+
+table{
+border-collapse:collapse;
+width:350px;
+}
+
+th{
+background:gold;
+color:black;
+}
+
+th,td{
+padding:8px;
+border:1px solid #444;
+}
+
+tr:nth-child(even){
+background:#1b1b1b;
 }
