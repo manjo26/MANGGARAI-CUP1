@@ -1,49 +1,184 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Manggarai Cup eFootball</title>
-<link rel="stylesheet" href="style.css">
+<title>Manggarai League</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+h1{
+margin-top:20px;
+}
+
+.container{
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.table-box{
+background:#1e293b;
+padding:20px;
+border-radius:10px;
+width:400px;
+box-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+th{
+background:#22c55e;
+padding:10px;
+}
+
+td{
+padding:8px;
+border-bottom:1px solid #334155;
+}
+
+.team{
+text-align:left;
+font-weight:bold;
+}
+
+.jadwal{
+margin-top:40px;
+}
+
+.match{
+background:#1e293b;
+margin:10px auto;
+padding:12px;
+width:500px;
+border-radius:8px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.score{
+background:#0f172a;
+padding:6px 10px;
+border-radius:6px;
+}
+
+.week{
+margin-top:30px;
+color:#22c55e;
+}
+
+</style>
 </head>
 
 <body>
 
-<h1>🏆 Manggarai Cup eFootball</h1>
+<h1>🏆 Manggarai League</h1>
 
-<h2>📊 Klasemen Grup A</h2>
+<div class="container">
+
+<div class="table-box">
+<h2>Grup A</h2>
+
 <table id="tableA">
 <tr>
-<th>Team</th>
+<th>No</th>
+<th>Tim</th>
 <th>P</th>
-<th>W</th>
-<th>D</th>
-<th>L</th>
-<th>PTS</th>
+<th>Pts</th>
 </tr>
 </table>
 
-<h2>📊 Klasemen Grup B</h2>
+</div>
+
+<div class="table-box">
+<h2>Grup B</h2>
+
 <table id="tableB">
 <tr>
-<th>Team</th>
+<th>No</th>
+<th>Tim</th>
 <th>P</th>
-<th>W</th>
-<th>D</th>
-<th>L</th>
-<th>PTS</th>
+<th>Pts</th>
 </tr>
 </table>
 
+</div>
+
+</div>
+
+<div class="jadwal">
+
 <h2>📅 Jadwal Pertandingan</h2>
-<div id="matches"></div>
 
-<h2>🏆 Semifinal</h2>
-<div id="semi"></div>
+<div id="schedule"></div>
 
-<h2>🥇 Final</h2>
-<div id="final"></div>
+</div>
 
-<script src="script.js"></script>
+<script>
 
-</body>
-</html>
+const schedule={
+A:[
+{
+week:"Pekan 1",
+matches:[
+["PALOPO FC","JURU KUNCI FC"],
+["ARENAFC","AYAM GEPREK FC"]
+],
+bye:"ARSENAL"
+},
+{
+week:"Pekan 2",
+matches:[
+["PALOPO FC","AYAM GEPREK FC"],
+["JURU KUNCI FC","ARSENAL"]
+],
+bye:"ARENAFC"
+}
+],
+
+B:[
+{
+week:"Pekan 1",
+matches:[
+["MANGGARAI RAYA","PESONA FC"],
+["BANGKA NACAP FC","PSCEWANG"]
+],
+bye:"GAPURTO FC"
+},
+{
+week:"Pekan 2",
+matches:[
+["MANGGARAI RAYA","PSCEWANG"],
+["PESONA FC","GAPURTO FC"]
+],
+bye:"BANGKA NACAP FC"
+}
+]
+}
+
+let scores={}
+
+function renderSchedule(){
+
+let div=document.getElementById("schedule")
+
+for(let g in schedule){
+
+div.innerHTML+=`<h3>Grup ${g}</h3>`
+
+schedule[g].forEach((w,i)=>{
+
+div.innerHTML+=`<h4 class="week
