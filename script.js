@@ -54,32 +54,42 @@ function loadAdminMatches(){
 let div=document.getElementById("adminMatches")
 if(!div) return
 
-let i=0
+div.innerHTML=""
+
+let index=0
 
 for(let g in schedule){
 
-div.innerHTML+=`<h2>Grup ${g}</h2>`
+div.innerHTML+=`<h2>🏆 Grup ${g}</h2>`
 
 schedule[g].forEach(w=>{
 
-div.innerHTML+=`<h3>${w.week}</h3>`
+div.innerHTML+=`<h3>📅 ${w.week}</h3>`
 
 w.matches.forEach(m=>{
 
-let s1=scores[i]?.[0] || ""
-let s2=scores[i]?.[1] || ""
+let s1=scores[index]?.[0] ?? ""
+let s2=scores[index]?.[1] ?? ""
 
 div.innerHTML+=`
-<p>
-${m[0]}
-<input id="s1${i}" value="${s1}">
-vs
-<input id="s2${i}" value="${s2}">
-${m[1]}
-</p>
+
+<div class="match">
+
+<span>${m[0]}</span>
+
+<input id="s1${index}" value="${s1}">
+
+<span>vs</span>
+
+<input id="s2${index}" value="${s2}">
+
+<span>${m[1]}</span>
+
+</div>
+
 `
 
-i++
+index++
 
 })
 
@@ -88,6 +98,7 @@ i++
 }
 
 }
+
 
 function saveScores(){
 
