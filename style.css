@@ -37,23 +37,13 @@ background:#22c55e;
 border:none;
 padding:10px 20px;
 cursor:pointer;
-margin-top:10px;
 }
 
 .match{
 display:flex;
 justify-content:center;
-align-items:center;
 gap:10px;
-margin:8px;
+margin:6px;
 background:#0f172a;
 padding:8px;
-border-radius:6px;
-}
-
-
-#matches p{
-background:#0f172a;
-padding:10px;
-margin:5px;
 }
