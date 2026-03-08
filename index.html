@@ -1,284 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Manggarai Cup</title>
-
-<style>
-
-body{
-font-family:Arial;
-background:#0f172a;
-color:white;
-text-align:center;
-}
-
-h1{
-margin:20px;
-}
-
-.container{
-display:flex;
-justify-content:center;
-gap:40px;
-flex-wrap:wrap;
-}
-
-.table-box{
-background:#1e293b;
-padding:20px;
-border-radius:10px;
-width:420px;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-th{
-background:#22c55e;
-padding:10px;
-}
-
-td{
-padding:8px;
-border-bottom:1px solid #334155;
-}
-
-.team{
-text-align:left;
-font-weight:bold;
-}
-
-.schedule{
-margin-top:40px;
-}
-
-.match{
-background:#1e293b;
-margin:10px auto;
-padding:12px;
-width:520px;
-border-radius:8px;
-display:flex;
-justify-content:space-between;
-}
-
-.time{
-color:#22c55e;
-}
-
-.week{
-margin-top:30px;
-color:#22c55e;
-}
-
-</style>
-
+<title>Manggarai Cup 1</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>🏆 EFOOTBALL MANGGARAI CUP</h1>
+<h1>🏆 Manggarai Cup 1</h1>
 
-<div class="container">
-
-<div class="table-box">
 <h2>Grup A</h2>
-<table>
+<table id="tableA">
 <tr>
-<th>No</th>
-<th>Tim</th>
+<th>Team</th>
+<th>M</th>
+<th>W</th>
+<th>D</th>
+<th>L</th>
+<th>GF</th>
+<th>GA</th>
 <th>P</th>
-<th>Pts</th>
 </tr>
-
-<tr><td>1</td><td class="team">PALOPO FC</td><td>0</td><td>0</td></tr>
-<tr><td>2</td><td class="team">JURU KUNCI FC</td><td>0</td><td>0</td></tr>
-<tr><td>3</td><td class="team">ARSENAL</td><td>0</td><td>0</td></tr>
-<tr><td>4</td><td class="team">ARENA FC</td><td>0</td><td>0</td></tr>
-<tr><td>5</td><td class="team">AYAM GEPREK FC</td><td>0</td><td>0</td></tr>
-
 </table>
-</div>
 
-<div class="table-box">
 <h2>Grup B</h2>
-<table>
-
+<table id="tableB">
 <tr>
-<th>No</th>
-<th>Tim</th>
+<th>Team</th>
+<th>M</th>
+<th>W</th>
+<th>D</th>
+<th>L</th>
+<th>GF</th>
+<th>GA</th>
 <th>P</th>
-<th>Pts</th>
 </tr>
-
-<tr><td>1</td><td class="team">MANGGARAI RAYA</td><td>0</td><td>0</td></tr>
-<tr><td>2</td><td class="team">PESONA FC</td><td>0</td><td>0</td></tr>
-<tr><td>3</td><td class="team">BANGKA NACAP FC</td><td>0</td><td>0</td></tr>
-<tr><td>4</td><td class="team">PSCEWANG</td><td>0</td><td>0</td></tr>
-<tr><td>5</td><td class="team">GAPURTO FC</td><td>0</td><td>0</td></tr>
-
 </table>
-</div>
 
-</div>
-
-<div class="schedule">
-
-<h2>📅 Jadwal Pertandingan</h2>
-
-<!-- GRUP A -->
-
-<h3>GRUP A</h3>
-
-<h4 class="week">Pekan 1</h4>
-
-<div class="match">
-<span>PALOPO FC vs JURU KUNCI FC</span>
-<span class="time">15:00</span>
-</div>
-
-<div class="match">
-<span>ARENA FC vs AYAM GEPREK FC</span>
-<span class="time">15:20</span>
-</div>
-
-<p>ARSENAL (BYE)</p>
-
-<h4 class="week">Pekan 2</h4>
-
-<div class="match">
-<span>ARSENAL vs ARENA FC</span>
-<span class="time">16:20</span>
-</div>
-
-<div class="match">
-<span>AYAM GEPREK FC vs JURU KUNCI FC</span>
-<span class="time">16:40</span>
-</div>
-
-<p>PALOPO FC (BYE)</p>
-
-<h4 class="week">Pekan 3</h4>
-
-<div class="match">
-<span>PALOPO FC vs AYAM GEPREK FC</span>
-<span class="time">17:40</span>
-</div>
-
-<div class="match">
-<span>JURU KUNCI FC vs ARSENAL</span>
-<span class="time">18:00</span>
-</div>
-
-<p>ARENA FC (BYE)</p>
-
-<h4 class="week">Pekan 4</h4>
-
-<div class="match">
-<span>ARENA FC vs JURU KUNCI FC</span>
-<span class="time">19:00</span>
-</div>
-
-<div class="match">
-<span>ARSENAL vs PALOPO FC</span>
-<span class="time">19:20</span>
-</div>
-
-<p>AYAM GEPREK FC (BYE)</p>
-
-<h4 class="week">Pekan 5</h4>
-
-<div class="match">
-<span>AYAM GEPREK FC vs ARSENAL</span>
-<span class="time">20:20</span>
-</div>
-
-<div class="match">
-<span>PALOPO FC vs ARENA FC</span>
-<span class="time">20:40</span>
-</div>
-
-<p>JURU KUNCI FC (BYE)</p>
-
-
-<!-- GRUP B -->
-
-<h3>GRUP B</h3>
-
-<h4 class="week">Pekan 1</h4>
-
-<div class="match">
-<span>MANGGARAI RAYA vs PESONA FC</span>
-<span class="time">15:40</span>
-</div>
-
-<div class="match">
-<span>BANGKA NACAP FC vs PSCEWANG</span>
-<span class="time">16:00</span>
-</div>
-
-<p>GAPURTO FC (BYE)</p>
-
-<h4 class="week">Pekan 2</h4>
-
-<div class="match">
-<span>GAPURTO FC vs BANGKA NACAP FC</span>
-<span class="time">17:00</span>
-</div>
-
-<div class="match">
-<span>PSCEWANG vs PESONA FC</span>
-<span class="time">17:20</span>
-</div>
-
-<p>MANGGARAI RAYA (BYE)</p>
-
-<h4 class="week">Pekan 3</h4>
-
-<div class="match">
-<span>MANGGARAI RAYA vs PSCEWANG</span>
-<span class="time">18:20</span>
-</div>
-
-<div class="match">
-<span>PESONA FC vs GAPURTO FC</span>
-<span class="time">18:40</span>
-</div>
-
-<p>BANGKA NACAP FC (BYE)</p>
-
-<h4 class="week">Pekan 4</h4>
-
-<div class="match">
-<span>BANGKA NACAP FC vs PESONA FC</span>
-<span class="time">19:40</span>
-</div>
-
-<div class="match">
-<span>GAPURTO FC vs MANGGARAI RAYA</span>
-<span class="time">20:00</span>
-</div>
-
-<p>PSCEWANG (BYE)</p>
-
-<h4 class="week">Pekan 5</h4>
-
-<div class="match">
-<span>PSCEWANG vs GAPURTO FC</span>
-<span class="time">21:00</span>
-</div>
-
-<div class="match">
-<span>MANGGARAI RAYA vs BANGKA NACAP FC</span>
-<span class="time">21:20</span>
-</div>
-
-<p>PESONA FC (BYE)</p>
-
-</div>
+<script src="script.js"></script>
 
 </body>
 </html>
