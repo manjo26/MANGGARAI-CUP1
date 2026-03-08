@@ -1,53 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Panel</title>
+<title>Admin Manggarai Cup</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>ADMIN TAMBAH TIM</h1>
+<h1>⚙️ Admin Panel</h1>
 
-<input id="teamName" placeholder="Nama Tim">
-<button onclick="addTeam()">Tambah</button>
+<h2>Input Skor Pertandingan</h2>
 
-<h2>Daftar Tim</h2>
-<ul id="list"></ul>
+<div id="adminMatches"></div>
 
-<script>
+<button onclick="saveScores()">💾 Simpan Skor</button>
 
-let teams = JSON.parse(localStorage.getItem("teams")) || []
-
-function showTeams(){
-
-let list=document.getElementById("list")
-list.innerHTML=""
-
-teams.forEach(team=>{
-
-let li=document.createElement("li")
-li.innerText=team
-list.appendChild(li)
-
-})
-
-}
-
-function addTeam(){
-
-let name=document.getElementById("teamName").value
-
-teams.push(name)
-
-localStorage.setItem("teams",JSON.stringify(teams))
-
-showTeams()
-
-}
-
-showTeams()
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
