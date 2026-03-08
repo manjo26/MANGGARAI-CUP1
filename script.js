@@ -1,51 +1,88 @@
-function loadAdminMatches(){
+let klasemen = JSON.parse(localStorage.getItem("klasemen")) || {
 
-let div=document.getElementById("adminMatches")
-if(!div) return
+"PALOPO FC":{main:0,poin:0,grup:"A"},
+"ARENA FC":{main:0,poin:0,grup:"A"},
+"ARSENAL":{main:0,poin:0,grup:"A"},
+"AYAM GEPREK FC":{main:0,poin:0,grup:"A"},
+"JURU KUNCI FC":{main:0,poin:0,grup:"A"},
 
-div.innerHTML=""
+"MANGGARAI RAYA":{main:0,poin:0,grup:"B"},
+"BANGKA NACAP FC":{main:0,poin:0,grup:"B"},
+"GAPURTO FC":{main:0,poin:0,grup:"B"},
+"PSCEWANG":{main:0,poin:0,grup:"B"},
+"PESONA FC":{main:0,poin:0,grup:"B"}
 
-let index=0
+};
 
-for(let g in schedule){
+function simpan(){
+localStorage.setItem("klasemen",JSON.stringify(klasemen));
+}
 
-div.innerHTML += `<h2 class="group-title">🏆 Grup ${g}</h2>`
+if(document.getElementById("formSkor")){
 
-schedule[g].forEach(w=>{
+document.getElementById("formSkor").addEventListener("submit",function(e){
 
-div.innerHTML += `<h3 class="week">📅 ${w.week}</h3>`
+e.preventDefault()
 
-w.matches.forEach(m=>{
+let tim1=document.getElementById("tim1").value
+let tim2=document.getElementById("tim2").value
 
-let s1=scores[index]?.[0] ?? ""
-let s2=scores[index]?.[1] ?? ""
+let skor1=parseInt(document.getElementById("skor1").value)
+let skor2=parseInt(document.getElementById("skor2").value)
 
-div.innerHTML += `
+klasemen[tim1].main++
+klasemen[tim2].main++
 
-<div class="match-card">
+if(skor1>skor2){
+klasemen[tim1].poin+=3
+}
 
-<div class="team">${m[0]}</div>
+else if(skor2>skor1){
+klasemen[tim2].poin+=3
+}
 
-<input class="score" id="s1${index}" value="${s1}">
+else{
+klasemen[tim1].poin+=1
+klasemen[tim2].poin+=1
+}
 
-<span class="vs">vs</span>
+simpan()
 
-<input class="score" id="s2${index}" value="${s2}">
-
-<div class="team">${m[1]}</div>
-
-</div>
-
-`
-
-index++
-
-})
-
-div.innerHTML += `<p>${w.bye} (Libur)</p>`
+alert("Skor berhasil disimpan")
 
 })
 
 }
 
+function tampil(){
+
+let grupA=[]
+let grupB=[]
+
+for(let tim in klasemen){
+
+if(klasemen[tim].grup=="A"){
+grupA.push([tim,klasemen[tim]])
+}else{
+grupB.push([tim,klasemen[tim]])
 }
+
+}
+
+grupA.sort((a,b)=>b[1].poin-a[1].poin)
+grupB.sort((a,b)=>b[1].poin-a[1].poin)
+
+let tabelA=document.getElementById("grupA")
+let tabelB=document.getElementById("grupB")
+
+if(tabelA){
+
+tabelA.innerHTML+="<tr><td>"+grupA[0][0]+"</td><td>"+grupA[0][1].main+"</td><td>"+grupA[0][1].poin+"</td></tr>"
+
+tabelB.innerHTML+="<tr><td>"+grupB[0][0]+"</td><td>"+grupB[0][1].main+"</td><td>"+grupB[0][1].poin+"</td></tr>"
+
+}
+
+}
+
+tampil()
