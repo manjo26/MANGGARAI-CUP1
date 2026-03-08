@@ -1,4 +1,20 @@
-const groupA = [
+const password="admin123"
+
+function login(){
+
+let p=document.getElementById("pass").value
+
+if(p===password){
+document.getElementById("login").style.display="none"
+document.getElementById("panel").style.display="block"
+loadMatches()
+}else{
+alert("Password salah")
+}
+
+}
+
+const groupA=[
 "PALOPO FC",
 "ARENAFC",
 "ARSENAL",
@@ -6,7 +22,7 @@ const groupA = [
 "JURU KUNCI FC"
 ]
 
-const groupB = [
+const groupB=[
 "MANGGARAI RAYA",
 "BANGKA NACAP FC",
 "GAPURTO FC",
@@ -14,111 +30,75 @@ const groupB = [
 "PESONA FC"
 ]
 
-let matches = [
+let matches=[
 
-{team1:"PALOPO FC",team2:"JURU KUNCI FC",score1:null,score2:null},
-{team1:"ARENAFC",team2:"AYAM GEPREK FC",score1:null,score2:null},
+["PALOPO FC","JURU KUNCI FC"],
+["ARENAFC","AYAM GEPREK FC"],
 
-{team1:"PALOPO FC",team2:"AYAM GEPREK FC",score1:null,score2:null},
-{team1:"JURU KUNCI FC",team2:"ARSENAL",score1:null,score2:null},
+["PALOPO FC","AYAM GEPREK FC"],
+["JURU KUNCI FC","ARSENAL"],
 
-{team1:"PALOPO FC",team2:"ARSENAL",score1:null,score2:null},
-{team1:"AYAM GEPREK FC",team2:"ARENAFC",score1:null,score2:null},
+["PALOPO FC","ARSENAL"],
+["AYAM GEPREK FC","ARENAFC"],
 
-{team1:"PALOPO FC",team2:"ARENAFC",score1:null,score2:null},
-{team1:"ARSENAL",team2:"AYAM GEPREK FC",score1:null,score2:null},
+["PALOPO FC","ARENAFC"],
+["ARSENAL","AYAM GEPREK FC"],
 
-{team1:"ARENAFC",team2:"JURU KUNCI FC",score1:null,score2:null},
-{team1:"ARSENAL",team2:"PALOPO FC",score1:null,score2:null},
+["ARENAFC","JURU KUNCI FC"],
+["ARSENAL","PALOPO FC"],
 
-{team1:"MANGGARAI RAYA",team2:"PESONA FC",score1:null,score2:null},
-{team1:"BANGKA NACAP FC",team2:"PSCEWANG",score1:null,score2:null},
+["MANGGARAI RAYA","PESONA FC"],
+["BANGKA NACAP FC","PSCEWANG"],
 
-{team1:"MANGGARAI RAYA",team2:"PSCEWANG",score1:null,score2:null},
-{team1:"PESONA FC",team2:"GAPURTO FC",score1:null,score2:null},
+["MANGGARAI RAYA","PSCEWANG"],
+["PESONA FC","GAPURTO FC"],
 
-{team1:"MANGGARAI RAYA",team2:"GAPURTO FC",score1:null,score2:null},
-{team1:"PSCEWANG",team2:"BANGKA NACAP FC",score1:null,score2:null},
+["MANGGARAI RAYA","GAPURTO FC"],
+["PSCEWANG","BANGKA NACAP FC"],
 
-{team1:"MANGGARAI RAYA",team2:"BANGKA NACAP FC",score1:null,score2:null},
-{team1:"GAPURTO FC",team2:"PESONA FC",score1:null,score2:null},
+["MANGGARAI RAYA","BANGKA NACAP FC"],
+["GAPURTO FC","PESONA FC"],
 
-{team1:"PESONA FC",team2:"BANGKA NACAP FC",score1:null,score2:null},
-{team1:"GAPURTO FC",team2:"PSCEWANG",score1:null,score2:null}
+["PESONA FC","BANGKA NACAP FC"],
+["GAPURTO FC","PSCEWANG"]
 
 ]
 
-function createTable(group,tableId){
-
-let table=document.getElementById(tableId)
-
-group.forEach(team=>{
-
-let row=`
-<tr>
-<td>${team}</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-`
-
-table.innerHTML+=row
-
-})
-
-}
-
-createTable(groupA,"tableA")
-createTable(groupB,"tableB")
-
 function loadMatches(){
 
-let div=document.getElementById("matches")
 let admin=document.getElementById("adminMatches")
 
 matches.forEach((m,i)=>{
 
-if(div){
-div.innerHTML+=`
-<p>${m.team1} vs ${m.team2}</p>
-`
-}
-
-if(admin){
-
 admin.innerHTML+=`
 <p>
-${m.team1}
+${m[0]}
 <input id="s1${i}">
 vs
 <input id="s2${i}">
-${m.team2}
+${m[1]}
 </p>
 `
-
-}
 
 })
 
 }
 
-loadMatches()
-
 function saveScores(){
+
+let scores=[]
 
 matches.forEach((m,i)=>{
 
 let s1=document.getElementById("s1"+i).value
 let s2=document.getElementById("s2"+i).value
 
-m.score1=s1
-m.score2=s2
+scores.push([s1,s2])
 
 })
 
-alert("Skor berhasil disimpan!")
+localStorage.setItem("scores",JSON.stringify(scores))
+
+alert("Skor tersimpan!")
 
 }
