@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>Admin Manggarai Cup</title>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -9,11 +10,22 @@
 
 <h1>⚙️ Admin Panel</h1>
 
-<h2>Input Skor Pertandingan</h2>
+<div id="login">
+
+<input type="password" id="pass" placeholder="Password admin">
+<button onclick="login()">Login</button>
+
+</div>
+
+<div id="panel" style="display:none">
+
+<h2>Input Skor</h2>
 
 <div id="adminMatches"></div>
 
 <button onclick="saveScores()">💾 Simpan Skor</button>
+
+</div>
 
 <script src="script.js"></script>
 
