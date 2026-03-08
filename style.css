@@ -11,8 +11,8 @@ margin-top:20px;
 }
 
 .sub{
-opacity:0.8;
 margin-bottom:30px;
+opacity:0.8;
 }
 
 .container{
@@ -26,12 +26,13 @@ flex-wrap:wrap;
 background:#111;
 padding:20px;
 border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.6);
+width:400px;
+box-shadow:0 0 15px rgba(0,0,0,0.7);
 }
 
 table{
+width:100%;
 border-collapse:collapse;
-width:350px;
 }
 
 th{
@@ -45,5 +46,5 @@ border:1px solid #444;
 }
 
 tr:nth-child(even){
-background:#1b1b1b;
+background:#1c1c1c;
 }
