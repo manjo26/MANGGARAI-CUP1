@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Admin Dashboard</title>
+<title>Admin Manggarai Cup</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>⚙️ Manggarai Cup Admin</h1>
+<h1>Admin Input Skor</h1>
 
-<div class="login-box">
+<form id="formSkor">
 
-  <input type="password" id="pass" placeholder="Masukkan password">
-<button onclick="login()">Login</button>
+<select id="tim1">
+<option>PALOPO FC</option>
+<option>ARENA FC</option>
+<option>ARSENAL</option>
+<option>AYAM GEPREK FC</option>
+<option>JURU KUNCI FC</option>
 
-<div id="panel" style="display:none;">
-Admin Panel
-</div>
+<option>MANGGARAI RAYA</option>
+<option>BANGKA NACAP FC</option>
+<option>GAPURTO FC</option>
+<option>PSCEWANG</option>
+<option>PESONA FC</option>
+</select>
 
-<script>
-function login(){
+<input type="number" id="skor1">
 
-let password="admin123"
-let input=document.getElementById("pass").value
+VS
 
-if(input===password){
-document.getElementById("panel").style.display="block"
-alert("Login berhasil")
-}else{
-alert("Password salah")
-}
+<input type="number" id="skor2">
 
-}
-</script>
+<select id="tim2">
+<option>PALOPO FC</option>
+<option>ARENA FC</option>
+<option>ARSENAL</option>
+<option>AYAM GEPREK FC</option>
+<option>JURU KUNCI FC</option>
 
+<option>MANGGARAI RAYA</option>
+<option>BANGKA NACAP FC</option>
+<option>GAPURTO FC</option>
+<option>PSCEWANG</option>
+<option>PESONA FC</option>
+</select>
 
-<input type="password" id="pass" placeholder="Password admin">
-<button onclick="login()">Login</button>
+<br><br>
 
-</div>
+<button type="submit">Simpan Skor</button>
 
-<div id="panel" style="display:none">
-
-<h2>⚽ Input Skor Pertandingan</h2>
-
-<div id="adminMatches"></div>
-
-<button class="save-btn" onclick="saveScores()">💾 Simpan Semua Skor</button>
-
-</div>
+</form>
 
 <script src="script.js"></script>
 
