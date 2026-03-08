@@ -9,22 +9,17 @@ h1{
 color:#22c55e;
 }
 
-.container{
-width:90%;
-margin:auto;
-}
-
 table{
 margin:auto;
 border-collapse:collapse;
-width:90%;
+width:80%;
 background:#0f172a;
 margin-bottom:30px;
 }
 
 th,td{
 border:1px solid #334155;
-padding:8px;
+padding:10px;
 }
 
 th{
@@ -42,6 +37,7 @@ background:#22c55e;
 border:none;
 padding:10px 20px;
 cursor:pointer;
+margin-top:10px;
 }
 
 #matches p{
