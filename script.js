@@ -1,85 +1,73 @@
 let klasemen = JSON.parse(localStorage.getItem("klasemen")) || {
 
-"PALOPO FC":{main:0,poin:0,grup:"A"},
-"ARENA FC":{main:0,poin:0,grup:"A"},
-"ARSENAL":{main:0,poin:0,grup:"A"},
-"AYAM GEPREK FC":{main:0,poin:0,grup:"A"},
-"JURU KUNCI FC":{main:0,poin:0,grup:"A"},
+"PALOPO FC":{m:0,w:0,d:0,l:0,p:0,g:"A"},
+"ARENA FC":{m:0,w:0,d:0,l:0,p:0,g:"A"},
+"ARSENAL":{m:0,w:0,d:0,l:0,p:0,g:"A"},
+"AYAM GEPREK FC":{m:0,w:0,d:0,l:0,p:0,g:"A"},
+"JURU KUNCI FC":{m:0,w:0,d:0,l:0,p:0,g:"A"},
 
-"MANGGARAI RAYA":{main:0,poin:0,grup:"B"},
-"BANGKA NACAP FC":{main:0,poin:0,grup:"B"},
-"GAPURTO FC":{main:0,poin:0,grup:"B"},
-"PSCEWANG":{main:0,poin:0,grup:"B"},
-"PESONA FC":{main:0,poin:0,grup:"B"}
-
-};
-
-function simpan(){
-localStorage.setItem("klasemen",JSON.stringify(klasemen));
-}
-
-if(document.getElementById("formSkor")){
-
-document.getElementById("formSkor").addEventListener("submit",function(e){
-
-e.preventDefault()
-
-let tim1=document.getElementById("tim1").value
-let tim2=document.getElementById("tim2").value
-
-let skor1=parseInt(document.getElementById("skor1").value)
-let skor2=parseInt(document.getElementById("skor2").value)
-
-klasemen[tim1].main++
-klasemen[tim2].main++
-
-if(skor1>skor2){
-klasemen[tim1].poin+=3
-}
-
-else if(skor2>skor1){
-klasemen[tim2].poin+=3
-}
-
-else{
-klasemen[tim1].poin+=1
-klasemen[tim2].poin+=1
-}
-
-simpan()
-
-alert("Skor berhasil disimpan")
-
-})
+"MANGGARAI RAYA":{m:0,w:0,d:0,l:0,p:0,g:"B"},
+"BANGKA NACAP FC":{m:0,w:0,d:0,l:0,p:0,g:"B"},
+"GAPURTO FC":{m:0,w:0,d:0,l:0,p:0,g:"B"},
+"PSCEWANG":{m:0,w:0,d:0,l:0,p:0,g:"B"},
+"PESONA FC":{m:0,w:0,d:0,l:0,p:0,g:"B"}
 
 }
 
 function tampil(){
 
-let grupA=[]
-let grupB=[]
+let A=[]
+let B=[]
 
 for(let tim in klasemen){
 
-if(klasemen[tim].grup=="A"){
-grupA.push([tim,klasemen[tim]])
+if(klasemen[tim].g=="A"){
+A.push([tim,klasemen[tim]])
 }else{
-grupB.push([tim,klasemen[tim]])
+B.push([tim,klasemen[tim]])
 }
 
 }
 
-grupA.sort((a,b)=>b[1].poin-a[1].poin)
-grupB.sort((a,b)=>b[1].poin-a[1].poin)
+A.sort((a,b)=>b[1].p-a[1].p)
+B.sort((a,b)=>b[1].p-a[1].p)
 
 let tabelA=document.getElementById("grupA")
 let tabelB=document.getElementById("grupB")
 
 if(tabelA){
 
-tabelA.innerHTML+="<tr><td>"+grupA[0][0]+"</td><td>"+grupA[0][1].main+"</td><td>"+grupA[0][1].poin+"</td></tr>"
+A.forEach((t,i)=>{
 
-tabelB.innerHTML+="<tr><td>"+grupB[0][0]+"</td><td>"+grupB[0][1].main+"</td><td>"+grupB[0][1].poin+"</td></tr>"
+tabelA.innerHTML+=`
+<tr>
+<td>${i+1}</td>
+<td>${t[0]}</td>
+<td>${t[1].m}</td>
+<td>${t[1].w}</td>
+<td>${t[1].d}</td>
+<td>${t[1].l}</td>
+<td>${t[1].p}</td>
+</tr>
+`
+
+})
+
+B.forEach((t,i)=>{
+
+tabelB.innerHTML+=`
+<tr>
+<td>${i+1}</td>
+<td>${t[0]}</td>
+<td>${t[1].m}</td>
+<td>${t[1].w}</td>
+<td>${t[1].d}</td>
+<td>${t[1].l}</td>
+<td>${t[1].p}</td>
+</tr>
+`
+
+})
 
 }
 
