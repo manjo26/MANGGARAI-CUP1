@@ -24,7 +24,7 @@ function login(){
 
 let pass=document.getElementById("password").value;
 
-if(pass === passwordAdmin){
+if(pass==="12345"){
 
 document.getElementById("loginBox").style.display="none";
 document.getElementById("adminPanel").style.display="block";
@@ -33,7 +33,7 @@ loadTeams();
 
 }else{
 
-alert("Password salah bro");
+alert("Password salah");
 
 }
 
@@ -49,15 +49,16 @@ team2.innerHTML="";
 
 for(let t in teams){
 
-let opt1=document.createElement("option");
-opt1.value=t;
-opt1.text=t;
-team1.appendChild(opt1);
+let o1=document.createElement("option");
+o1.value=t;
+o1.text=t;
 
-let opt2=document.createElement("option");
-opt2.value=t;
-opt2.text=t;
-team2.appendChild(opt2);
+let o2=document.createElement("option");
+o2.value=t;
+o2.text=t;
+
+team1.appendChild(o1);
+team2.appendChild(o2);
 
 }
 
@@ -72,7 +73,7 @@ let s1=parseInt(document.getElementById("score1").value);
 let s2=parseInt(document.getElementById("score2").value);
 
 if(t1===t2){
-alert("Tidak boleh tim yang sama");
+alert("Tim tidak boleh sama");
 return;
 }
 
@@ -87,13 +88,13 @@ teams[t2].ga+=s1;
 
 if(s1>s2){
 teams[t1].w++;
-teams[t1].p+=3;
 teams[t2].l++;
+teams[t1].p+=3;
 }
 else if(s2>s1){
 teams[t2].w++;
-teams[t2].p+=3;
 teams[t1].l++;
+teams[t2].p+=3;
 }
 else{
 teams[t1].d++;
@@ -104,7 +105,7 @@ teams[t2].p+=1;
 
 save();
 
-alert("Skor berhasil disimpan");
+alert("Skor disimpan");
 
 }
 
@@ -112,6 +113,8 @@ function render(){
 
 let tableA=document.querySelector("#tableA tbody");
 let tableB=document.querySelector("#tableB tbody");
+
+if(!tableA) return;
 
 tableA.innerHTML="";
 tableB.innerHTML="";
@@ -125,7 +128,6 @@ let groupB=Object.entries(teams)
 .sort((a,b)=>b[1].p-a[1].p);
 
 groupA.forEach(t=>{
-
 tableA.innerHTML+=`
 <tr>
 <td>${t[0]}</td>
@@ -136,13 +138,10 @@ tableA.innerHTML+=`
 <td>${t[1].gf}</td>
 <td>${t[1].ga}</td>
 <td>${t[1].p}</td>
-</tr>
-`;
-
+</tr>`;
 });
 
 groupB.forEach(t=>{
-
 tableB.innerHTML+=`
 <tr>
 <td>${t[0]}</td>
@@ -153,13 +152,9 @@ tableB.innerHTML+=`
 <td>${t[1].gf}</td>
 <td>${t[1].ga}</td>
 <td>${t[1].p}</td>
-</tr>
-`;
-
+</tr>`;
 });
 
 }
 
-if(document.getElementById("tableA")){
 render();
-}
