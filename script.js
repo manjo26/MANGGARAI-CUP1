@@ -37,9 +37,21 @@ let tabelB=document.getElementById("grupB")
 
 if(tabelA){
 
+tabelA.innerHTML = `
+<tr>
+<th>No</th>
+<th>Tim</th>
+<th>M</th>
+<th>W</th>
+<th>D</th>
+<th>L</th>
+<th>P</th>
+</tr>
+`
+
 A.forEach((t,i)=>{
 
-tabelA.innerHTML+=`
+tabelA.innerHTML += `
 <tr>
 <td>${i+1}</td>
 <td>${t[0]}</td>
@@ -53,9 +65,21 @@ tabelA.innerHTML+=`
 
 })
 
+tabelB.innerHTML = `
+<tr>
+<th>No</th>
+<th>Tim</th>
+<th>M</th>
+<th>W</th>
+<th>D</th>
+<th>L</th>
+<th>P</th>
+</tr>
+`
+
 B.forEach((t,i)=>{
 
-tabelB.innerHTML+=`
+tabelB.innerHTML += `
 <tr>
 <td>${i+1}</td>
 <td>${t[0]}</td>
