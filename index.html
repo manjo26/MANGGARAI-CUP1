@@ -1,33 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Manggarai Cup</title>
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
 <h1>🏆 MANGGARAI CUP EFOOTBALL</h1>
 
-<h2>Tim Peserta</h2>
+<h2>GRUP A</h2>
+<ul>
+<li>PALOPO FC</li>
+<li>ARENAFC</li>
+<li>ARSENAL</li>
+<li>AYAM GEPREK FC</li>
+<li>JURU KUNCI FC</li>
+</ul>
 
-<ul id="teamList"></ul>
+<h2>GRUP B</h2>
+<ul>
+<li>MANGGARAI RAYA</li>
+<li>BANGKA NACAP FC</li>
+<li>GAPURTO FC</li>
+<li>PSCEWANG</li>
+<li>PESONA FC</li>
+</ul>
 
-<script>
+<h2>📅 Jadwal Pertandingan</h2>
 
-let teams = JSON.parse(localStorage.getItem("teams")) || []
+<h3>Grup A Pekan 1</h3>
+<ul>
+<li>PALOPO FC vs JURU KUNCI FC</li>
+<li>ARENAFC vs AYAM GEPREK FC</li>
+<li>ARSENAL (Libur)</li>
+</ul>
 
-let list = document.getElementById("teamList")
+<h3>Grup A Pekan 2</h3>
+<ul>
+<li>PALOPO FC vs AYAM GEPREK FC</li>
+<li>JURU KUNCI FC vs ARSENAL</li>
+<li>ARENAFC (Libur)</li>
+</ul>
 
-teams.forEach(team => {
-
-let li = document.createElement("li")
-li.innerText = team
-list.appendChild(li)
-
-})
-
-</script>
-
-</body>
-</html>
+<h3>Grup B Pekan 1</h3>
+<ul>
+<li>MANGGARAI RAYA vs PESONA FC</li>
+<li>BANGKA NACAP FC vs PSCEWANG</li>
+<li>GAPURTO FC (Libur)</li>
+</ul>
