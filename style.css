@@ -1,6 +1,6 @@
 body{
 font-family:Arial;
-background:#0f172a;
+background:#020617;
 color:white;
 text-align:center;
 }
@@ -9,16 +9,22 @@ h1{
 color:#22c55e;
 }
 
+.container{
+width:90%;
+margin:auto;
+}
+
 table{
 margin:auto;
 border-collapse:collapse;
-width:60%;
-background:#1e293b;
+width:90%;
+background:#0f172a;
+margin-bottom:30px;
 }
 
 th,td{
 border:1px solid #334155;
-padding:10px;
+padding:8px;
 }
 
 th{
@@ -32,8 +38,14 @@ text-align:center;
 }
 
 button{
-padding:10px 20px;
 background:#22c55e;
 border:none;
+padding:10px 20px;
 cursor:pointer;
+}
+
+#matches p{
+background:#0f172a;
+padding:10px;
+margin:5px;
 }
