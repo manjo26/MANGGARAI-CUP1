@@ -1,87 +1,51 @@
-let data = JSON.parse(localStorage.getItem("klasemen"))
+function loadAdminMatches(){
 
-if(!data){
+let div=document.getElementById("adminMatches")
+if(!div) return
 
-data = {
+div.innerHTML=""
 
-"PALOPO FC":{m:0,w:0,d:0,l:0,p:0,g:"A"},
-"ARENA FC":{m:0,w:0,d:0,l:0,p:0,g:"A"},
-"ARSENAL":{m:0,w:0,d:0,l:0,p:0,g:"A"},
-"AYAM GEPREK FC":{m:0,w:0,d:0,l:0,p:0,g:"A"},
-"JURU KUNCI FC":{m:0,w:0,d:0,l:0,p:0,g:"A"},
+let index=0
 
-"MANGGARAI RAYA":{m:0,w:0,d:0,l:0,p:0,g:"B"},
-"BANGKA NACAP FC":{m:0,w:0,d:0,l:0,p:0,g:"B"},
-"GAPURTO FC":{m:0,w:0,d:0,l:0,p:0,g:"B"},
-"PSCEWANG":{m:0,w:0,d:0,l:0,p:0,g:"B"},
-"PESONA FC":{m:0,w:0,d:0,l:0,p:0,g:"B"}
+for(let g in schedule){
 
-}
+div.innerHTML += `<h2 class="group-title">🏆 Grup ${g}</h2>`
 
-}
+schedule[g].forEach(w=>{
 
-function simpan(){
-localStorage.setItem("klasemen",JSON.stringify(data))
-}
+div.innerHTML += `<h3 class="week">📅 ${w.week}</h3>`
 
-function tampil(){
+w.matches.forEach(m=>{
 
-let A=[]
-let B=[]
+let s1=scores[index]?.[0] ?? ""
+let s2=scores[index]?.[1] ?? ""
 
-for(let tim in data){
+div.innerHTML += `
 
-if(data[tim].g==="A"){
-A.push([tim,data[tim]])
-}else{
-B.push([tim,data[tim]])
-}
+<div class="match-card">
 
-}
+<div class="team">${m[0]}</div>
 
-A.sort((a,b)=>b[1].p-a[1].p)
-B.sort((a,b)=>b[1].p-a[1].p)
+<input class="score" id="s1${index}" value="${s1}">
 
-let tabelA=document.getElementById("grupA")
-let tabelB=document.getElementById("grupB")
+<span class="vs">vs</span>
 
-if(!tabelA) return
+<input class="score" id="s2${index}" value="${s2}">
 
-tabelA.innerHTML=""
-tabelB.innerHTML=""
+<div class="team">${m[1]}</div>
 
-A.forEach((t,i)=>{
+</div>
 
-tabelA.innerHTML+=`
-<tr>
-<td>${i+1}</td>
-<td>${t[0]}</td>
-<td>${t[1].m}</td>
-<td>${t[1].w}</td>
-<td>${t[1].d}</td>
-<td>${t[1].l}</td>
-<td>${t[1].p}</td>
-</tr>
 `
+
+index++
 
 })
 
-B.forEach((t,i)=>{
-
-tabelB.innerHTML+=`
-<tr>
-<td>${i+1}</td>
-<td>${t[0]}</td>
-<td>${t[1].m}</td>
-<td>${t[1].w}</td>
-<td>${t[1].d}</td>
-<td>${t[1].l}</td>
-<td>${t[1].p}</td>
-</tr>
-`
+div.innerHTML += `<p>${w.bye} (Libur)</p>`
 
 })
 
 }
 
-tampil()
+}
