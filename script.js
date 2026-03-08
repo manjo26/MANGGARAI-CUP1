@@ -1,4 +1,4 @@
-const passwordAdmin = "admin123";
+const passwordAdmin = "12345";
 
 let teams = JSON.parse(localStorage.getItem("teams")) || {
 
@@ -24,32 +24,40 @@ function login(){
 
 let pass=document.getElementById("password").value;
 
-if(pass===passwordAdmin){
-document.getElementById("login").style.display="none";
-document.getElementById("panel").style.display="block";
-loadTeams();
-}
+if(pass === passwordAdmin){
 
-else{
-alert("Password salah!");
+document.getElementById("loginBox").style.display="none";
+document.getElementById("adminPanel").style.display="block";
+
+loadTeams();
+
+}else{
+
+alert("Password salah bro");
+
 }
 
 }
 
 function loadTeams(){
 
-let select1=document.getElementById("team1");
-let select2=document.getElementById("team2");
+let team1=document.getElementById("team1");
+let team2=document.getElementById("team2");
+
+team1.innerHTML="";
+team2.innerHTML="";
 
 for(let t in teams){
 
 let opt1=document.createElement("option");
+opt1.value=t;
 opt1.text=t;
-select1.add(opt1);
+team1.appendChild(opt1);
 
 let opt2=document.createElement("option");
+opt2.value=t;
 opt2.text=t;
-select2.add(opt2);
+team2.appendChild(opt2);
 
 }
 
@@ -63,6 +71,11 @@ let t2=document.getElementById("team2").value;
 let s1=parseInt(document.getElementById("score1").value);
 let s2=parseInt(document.getElementById("score2").value);
 
+if(t1===t2){
+alert("Tidak boleh tim yang sama");
+return;
+}
+
 teams[t1].m++;
 teams[t2].m++;
 
@@ -74,16 +87,14 @@ teams[t2].ga+=s1;
 
 if(s1>s2){
 teams[t1].w++;
-teams[t2].l++;
 teams[t1].p+=3;
+teams[t2].l++;
 }
-
 else if(s2>s1){
 teams[t2].w++;
-teams[t1].l++;
 teams[t2].p+=3;
+teams[t1].l++;
 }
-
 else{
 teams[t1].d++;
 teams[t2].d++;
@@ -92,23 +103,29 @@ teams[t2].p+=1;
 }
 
 save();
-alert("Skor disimpan!");
+
+alert("Skor berhasil disimpan");
+
 }
 
 function render(){
 
+let tableA=document.querySelector("#tableA tbody");
+let tableB=document.querySelector("#tableB tbody");
+
+tableA.innerHTML="";
+tableB.innerHTML="";
+
 let groupA=Object.entries(teams)
-.filter(t=>t[1].group=="A")
+.filter(t=>t[1].group==="A")
 .sort((a,b)=>b[1].p-a[1].p);
 
 let groupB=Object.entries(teams)
-.filter(t=>t[1].group=="B")
+.filter(t=>t[1].group==="B")
 .sort((a,b)=>b[1].p-a[1].p);
 
-let tableA=document.getElementById("tableA");
-let tableB=document.getElementById("tableB");
-
 groupA.forEach(t=>{
+
 tableA.innerHTML+=`
 <tr>
 <td>${t[0]}</td>
@@ -121,9 +138,11 @@ tableA.innerHTML+=`
 <td>${t[1].p}</td>
 </tr>
 `;
+
 });
 
 groupB.forEach(t=>{
+
 tableB.innerHTML+=`
 <tr>
 <td>${t[0]}</td>
@@ -136,6 +155,7 @@ tableB.innerHTML+=`
 <td>${t[1].p}</td>
 </tr>
 `;
+
 });
 
 }
