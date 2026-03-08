@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Manggarai Cup 1</title>
+<title>Admin Manggarai Cup</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>Admin Manggarai Cup 1</h1>
+<h1>Admin Panel</h1>
 
-<div id="login">
+<div id="loginBox">
 
-<input type="password" id="password" placeholder="Password Admin">
+<input type="password" id="password" placeholder="Password admin">
 <button onclick="login()">Login</button>
 
 </div>
 
-<div id="panel" style="display:none">
+<div id="adminPanel" style="display:none">
 
 <h2>Input Skor</h2>
 
 <select id="team1"></select>
-<input type="number" id="score1">
+<input type="number" id="score1" min="0">
 
 VS
 
-<input type="number" id="score2">
+<input type="number" id="score2" min="0">
 <select id="team2"></select>
 
 <br><br>
 
-<button onclick="saveScore()">Simpan Skor</button>
+<button onclick="saveScore()">Simpan</button>
 
 </div>
 
