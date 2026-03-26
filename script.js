@@ -1,160 +1,153 @@
-const passwordAdmin = "12345";
+const PASSWORD = "admin123";
 
-let teams = JSON.parse(localStorage.getItem("teams")) || {
-
-"PALOPO FC":{group:"A",m:0,w:0,d:0,l:0,gf:0,ga:0,p:0},
-"JURU KUNCI FC":{group:"A",m:0,w:0,d:0,l:0,gf:0,ga:0,p:0},
-"ARENA FC":{group:"A",m:0,w:0,d:0,l:0,gf:0,ga:0,p:0},
-"AYAM GEPREK FC":{group:"A",m:0,w:0,d:0,l:0,gf:0,ga:0,p:0},
-"ARSENAL":{group:"A",m:0,w:0,d:0,l:0,gf:0,ga:0,p:0},
-
-"MANGGARAI RAYA":{group:"B",m:0,w:0,d:0,l:0,gf:0,ga:0,p:0},
-"PESONA FC":{group:"B",m:0,w:0,d:0,l:0,gf:0,ga:0,p:0},
-"BANGKA NACAP FC":{group:"B",m:0,w:0,d:0,l:0,gf:0,ga:0,p:0},
-"PSCEWANG":{group:"B",m:0,w:0,d:0,l:0,gf:0,ga:0,p:0},
-"GAPURTO FC":{group:"B",m:0,w:0,d:0,l:0,gf:0,ga:0,p:0}
-
-};
-
-function save(){
-localStorage.setItem("teams",JSON.stringify(teams));
+// ===== DATA =====
+function getTeams() {
+  return JSON.parse(localStorage.getItem("teams")) || [];
 }
 
-function login(){
-
-let pass=document.getElementById("password").value;
-
-if(pass==="12345"){
-
-document.getElementById("loginBox").style.display="none";
-document.getElementById("adminPanel").style.display="block";
-
-loadTeams();
-
-}else{
-
-alert("Password salah");
-
+function saveTeams(data) {
+  localStorage.setItem("teams", JSON.stringify(data));
 }
 
+// ===== LOGIN =====
+function login() {
+  let pass = document.getElementById("password").value;
+
+  if (pass === PASSWORD) {
+    document.getElementById("adminPanel").style.display = "block";
+    loadTeams();
+  } else {
+    alert("Password salah!");
+  }
 }
 
-function loadTeams(){
+// ===== TAMBAH TIM =====
+function addTeam() {
+  let name = document.getElementById("teamName").value;
+  let group = document.getElementById("group").value;
 
-let team1=document.getElementById("team1");
-let team2=document.getElementById("team2");
+  if (!name) return alert("Isi nama tim!");
 
-team1.innerHTML="";
-team2.innerHTML="";
+  let teams = getTeams();
 
-for(let t in teams){
+  teams.push({
+    name,
+    group,
+    main: 0,
+    win: 0,
+    lose: 0,
+    goal: 0,
+    conceded: 0,
+    diff: 0,
+    point: 0
+  });
 
-let o1=document.createElement("option");
-o1.value=t;
-o1.text=t;
+  saveTeams(teams);
+  loadTeams();
 
-let o2=document.createElement("option");
-o2.value=t;
-o2.text=t;
-
-team1.appendChild(o1);
-team2.appendChild(o2);
-
+  alert("Tim ditambahkan!");
 }
 
+// ===== LOAD DROPDOWN =====
+function loadTeams() {
+  let teams = getTeams();
+
+  let t1 = document.getElementById("team1");
+  let t2 = document.getElementById("team2");
+
+  if (!t1 || !t2) return;
+
+  t1.innerHTML = "";
+  t2.innerHTML = "";
+
+  teams.forEach(t => {
+    let opt1 = new Option(t.name, t.name);
+    let opt2 = new Option(t.name, t.name);
+
+    t1.add(opt1);
+    t2.add(opt2);
+  });
 }
 
-function saveScore(){
+// ===== INPUT SKOR =====
+function saveScore() {
+  let team1Name = document.getElementById("team1").value;
+  let team2Name = document.getElementById("team2").value;
+  let s1 = parseInt(document.getElementById("score1").value);
+  let s2 = parseInt(document.getElementById("score2").value);
 
-let t1=document.getElementById("team1").value;
-let t2=document.getElementById("team2").value;
+  let teams = getTeams();
 
-let s1=parseInt(document.getElementById("score1").value);
-let s2=parseInt(document.getElementById("score2").value);
+  let t1 = teams.find(t => t.name === team1Name);
+  let t2 = teams.find(t => t.name === team2Name);
 
-if(t1===t2){
-alert("Tim tidak boleh sama");
-return;
+  if (!t1 || !t2) return alert("Tim tidak ditemukan!");
+
+  t1.main++;
+  t2.main++;
+
+  t1.goal += s1;
+  t1.conceded += s2;
+  t2.goal += s2;
+  t2.conceded += s1;
+
+  t1.diff = t1.goal - t1.conceded;
+  t2.diff = t2.goal - t2.conceded;
+
+  if (s1 > s2) {
+    t1.win++;
+    t2.lose++;
+    t1.point += 3;
+  } else if (s2 > s1) {
+    t2.win++;
+    t1.lose++;
+    t2.point += 3;
+  }
+
+  saveTeams(teams);
+
+  alert("Skor disimpan!");
 }
 
-teams[t1].m++;
-teams[t2].m++;
+// ===== RENDER KLASMEN =====
+function renderTable() {
+  let data = getTeams();
 
-teams[t1].gf+=s1;
-teams[t1].ga+=s2;
+  let groupA = data.filter(t => t.group === "A");
+  let groupB = data.filter(t => t.group === "B");
 
-teams[t2].gf+=s2;
-teams[t2].ga+=s1;
+  groupA.sort((a,b) => b.point - a.point || b.diff - a.diff || b.goal - a.goal);
+  groupB.sort((a,b) => b.point - a.point || b.diff - a.diff || b.goal - a.goal);
 
-if(s1>s2){
-teams[t1].w++;
-teams[t2].l++;
-teams[t1].p+=3;
-}
-else if(s2>s1){
-teams[t2].w++;
-teams[t1].l++;
-teams[t2].p+=3;
-}
-else{
-teams[t1].d++;
-teams[t2].d++;
-teams[t1].p+=1;
-teams[t2].p+=1;
-}
+  function draw(id, group) {
+    let html = `
+    <tr>
+    <th>Tim</th><th>M</th><th>W</th><th>L</th>
+    <th>GM</th><th>GK</th><th>SG</th><th>Poin</th>
+    </tr>`;
 
-save();
+    group.forEach((t, i) => {
+      let cls = i===0?"top1":i===1?"top2":i===2?"top3":"";
+      html += `
+      <tr class="${cls}">
+        <td>${t.name}</td>
+        <td>${t.main}</td>
+        <td>${t.win}</td>
+        <td>${t.lose}</td>
+        <td>${t.goal}</td>
+        <td>${t.conceded}</td>
+        <td>${t.diff}</td>
+        <td>${t.point}</td>
+      </tr>`;
+    });
 
-alert("Skor disimpan");
+    document.getElementById(id).innerHTML = html;
+  }
 
-}
-
-function render(){
-
-let tableA=document.querySelector("#tableA tbody");
-let tableB=document.querySelector("#tableB tbody");
-
-if(!tableA) return;
-
-tableA.innerHTML="";
-tableB.innerHTML="";
-
-let groupA=Object.entries(teams)
-.filter(t=>t[1].group==="A")
-.sort((a,b)=>b[1].p-a[1].p);
-
-let groupB=Object.entries(teams)
-.filter(t=>t[1].group==="B")
-.sort((a,b)=>b[1].p-a[1].p);
-
-groupA.forEach(t=>{
-tableA.innerHTML+=`
-<tr>
-<td>${t[0]}</td>
-<td>${t[1].m}</td>
-<td>${t[1].w}</td>
-<td>${t[1].d}</td>
-<td>${t[1].l}</td>
-<td>${t[1].gf}</td>
-<td>${t[1].ga}</td>
-<td>${t[1].p}</td>
-</tr>`;
-});
-
-groupB.forEach(t=>{
-tableB.innerHTML+=`
-<tr>
-<td>${t[0]}</td>
-<td>${t[1].m}</td>
-<td>${t[1].w}</td>
-<td>${t[1].d}</td>
-<td>${t[1].l}</td>
-<td>${t[1].gf}</td>
-<td>${t[1].ga}</td>
-<td>${t[1].p}</td>
-</tr>`;
-});
-
+  if (document.getElementById("groupA")) {
+    draw("groupA", groupA);
+    draw("groupB", groupB);
+  }
 }
 
-render();
+renderTable();
