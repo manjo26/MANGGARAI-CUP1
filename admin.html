@@ -7,30 +7,38 @@
 
 <body>
 
-<h1>Admin Panel</h1>
+<h1>🏆 Admin Panel</h1>
 
 <div id="loginBox">
-
-<input type="password" id="password" placeholder="Password admin">
-<button onclick="login()">Login</button>
-
+  <input type="password" id="password" placeholder="Password admin">
+  <button onclick="login()">Login</button>
 </div>
 
 <div id="adminPanel" style="display:none">
 
-<h2>Input Skor</h2>
+  <h2>Tambah Tim</h2>
+  <input type="text" id="teamName" placeholder="Nama Tim">
+  <select id="group">
+    <option value="A">Grup A</option>
+    <option value="B">Grup B</option>
+  </select>
+  <button onclick="addTeam()">Tambah</button>
 
-<select id="team1"></select>
-<input type="number" id="score1" min="0">
+  <hr>
 
-VS
+  <h2>Input Skor</h2>
 
-<input type="number" id="score2" min="0">
-<select id="team2"></select>
+  <select id="team1"></select>
+  <input type="number" id="score1">
 
-<br><br>
+  VS
 
-<button onclick="saveScore()">Simpan</button>
+  <input type="number" id="score2">
+  <select id="team2"></select>
+
+  <br><br>
+
+  <button onclick="saveScore()">Simpan</button>
 
 </div>
 
