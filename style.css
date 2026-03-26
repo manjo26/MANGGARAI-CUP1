@@ -1,38 +1,60 @@
-body{
-font-family:Arial;
-background:#0d1b2a;
-color:white;
-text-align:center;
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  text-align: center;
 }
 
-h1{
-color:gold;
+h1 {
+  margin: 20px;
+  color: #38bdf8;
 }
 
-table{
-margin:auto;
-margin-bottom:30px;
-border-collapse:collapse;
-width:80%;
+.container {
+  width: 90%;
+  margin: auto;
 }
 
-th,td{
-border:1px solid white;
-padding:8px;
+.card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px;
 }
 
-th{
-background:#1b263b;
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-button{
-padding:10px 20px;
-background:gold;
-border:none;
-font-weight:bold;
-cursor:pointer;
+th {
+  background: #38bdf8;
+  color: black;
+  padding: 10px;
 }
 
-select,input{
-padding:6px;
+td {
+  padding: 10px;
+  border-bottom: 1px solid #555;
+}
+
+tr:hover {
+  background: rgba(56,189,248,0.2);
+}
+
+.top1 { background: gold; color: black; }
+.top2 { background: silver; color: black; }
+.top3 { background: #cd7f32; color: black; }
+
+button {
+  padding: 10px;
+  background: #38bdf8;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+input, select {
+  padding: 8px;
+  margin: 5px;
 }
